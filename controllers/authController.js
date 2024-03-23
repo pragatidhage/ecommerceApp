@@ -7,19 +7,19 @@ export const registerController = async (req, res) => {
     const { name, email, password, phone, address } = req.body;
     //validations
     if (!name) {
-      return res.send({ error: "Name is Required" });
+      return res.send({ message : "Name is Required" });
     }
     if (!email) {
-      return res.send({ error: "Email is Required" });
+      return res.send({ message : "Email is Required" });
     }
     if (!password) {
-      return res.send({ error: "Password is Required" });
+      return res.send({ message  : "Password is Required" });
     }
     if (!phone) {
-      return res.send({ error: "Phone No is Required" });
+      return res.send({ message : "Phone No is Required" });
     }
     if (!address) {
-      return res.send({ error: "Address is Required" });
+      return res.send({ message : "Address is Required" });
     }
 
     // check user
@@ -35,13 +35,13 @@ export const registerController = async (req, res) => {
     const hashedPassword = await hashPassword(password);
     //save
     const user = new userModel({
-      name ,
+      name,
       email,
       password: hashedPassword,
       phone,
-      address 
+      address,
     });
-   await  user.save()
+    await user.save();
 
     res.status(201).send({
       success: true,
@@ -89,16 +89,16 @@ export const loginController = async (req, res) => {
       expiresIn: "7d",
     });
     res.status(200).send({
-        success:true,
-        message:"login successfully",
-        user:{
-            name:user.name,
-            email:user.email,
-            phone:user.phone,
-            address:user.address,
-        },
-        token
-    })
+      success: true,
+      message: "login successfully",
+      user: {
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        address: user.address,
+      },
+      token,
+    });
   } catch (error) {
     console.log(error);
     res.status(500).send({
@@ -109,12 +109,11 @@ export const loginController = async (req, res) => {
   }
 };
 
-export const testController = (req,res) =>{
-    try{
-        res.send("Protected Routes");
-    }catch(error){
-        console.log(error);
-        res.send({error});
-    }
-    
-}
+export const testController = (req, res) => {
+  try {
+    res.send("Protected Routes");
+  } catch (error) {
+    console.log(error);
+    res.send({ error });
+  }
+};
