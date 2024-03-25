@@ -31,11 +31,11 @@ const Login = () => {
     }
   };
   return (
-    <Layout title={"Ecommerce App-Register"}>
+    <Layout title={"Ecommerce App-Login"}>
       <div className="form-container">
-        <h3>Register Page</h3>
+      
         <form onSubmit={handleSubmit}>
-         
+          <h3 className="title">LOGIN FORM</h3>
           <div className="mb-3">
             <label htmlFor="exampleInputEmail" className="form-label">
               Email

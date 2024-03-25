@@ -36,8 +36,9 @@ const Register = () => {
   return (
     <Layout title={"Ecommerce App-Register"}>
       <div className="form-container">
-        <h3>Register Page</h3>
+
         <form onSubmit={handleSubmit}>
+        <h3 className='title'>REGISTER FORM</h3>
           <div className="mb-3">
             <label htmlFor="exampleInputName" className="form-label">
               Name
