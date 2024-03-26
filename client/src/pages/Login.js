@@ -4,11 +4,14 @@ import Layout from "../components/Layout/Layout";
 import { useNavigate } from "react-router-dom"
 import toast from "react-hot-toast"
 import "./../styles/AuthStyle.css";
+import { useAuth } from "../context/auth"
 
 const Login = () => {
  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [auth,setAuth] = useAuth()
+
   const navigate = useNavigate()
  
    //hadle submit
@@ -21,6 +24,12 @@ const Login = () => {
       );
       if( res && res.data.success){
         toast.success( res.data && res.data.message)
+        setAuth({
+          ...auth,
+          user: res.data.user,
+          token: res.data.token,
+        });
+        localStorage.setItem('auth',JSON.stringify(res.data))
         navigate("/")
       }else {
         toast.error(res.data.message)
@@ -67,7 +76,7 @@ const Login = () => {
          
           
           <button type="submit" className="btn btn-primary">
-            Login
+            LOGIN
           </button>
         </form>
       </div>
